@@ -12,13 +12,31 @@
 .dodoFace.left { margin: -140px 0 0 -310px; }
 .dodoFace table td { padding: 5px; }
 .dodoFace table td img { cursor: pointer; }
+
+
+/*一下没有用只当外框用*/
+.wrap {
+	 width: 200px;
+	 height: 200px;
+	 border: 1px solid red;
+	 position: relative;
+}
+
+.wrap .showFace {
+	 left: 30px;
+	 top:10px;
+	 position: absolute;
+
+}
 </style>
 </head>
 <body>    
-
+   <div class="wrap">
+   	   <div class="showFace">点我</div>
+   </div>
    <!-- <textarea class="commentText" placeholder="点击输入评论..." type="text" value="123"></textarea> -->
-   <input type="text" class="commentText" name="" value="123445">
-   <button class="showFace">点我</button>
+   <textarea class="commentText" name="" value=""></textarea> 
+   <div class="faceText" style="font-size: 16px;"></div>
 </body>
 <script data-main="../../js/myExp" src="../../js/require.js"></script>
 </html>

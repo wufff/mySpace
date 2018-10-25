@@ -7,9 +7,9 @@
  */
  
 require(["re-config"],function(){
-require(["path"],function(path){
-    console.log(path);
-
+require(["path","jquery"],function(path,$){
+     
+     console.log($(".test").get(0))
 
 
 
