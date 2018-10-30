@@ -8,13 +8,8 @@
  
 require(["re-config"],function(){
 require(["path","jquery"],function(path,$){
-     
-     console.log($(".test").get(0))
-
-
-
-
-
+     console.log($.getJSON);
+    
 
 
 
