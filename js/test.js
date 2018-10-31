@@ -8,7 +8,9 @@
  
 require(["re-config"],function(){
 require(["path","jquery"],function(path,$){
-     console.log($.getJSON);
+     $(".tast1").click(function(){
+     	alert(123);
+     })
     
 
 
