@@ -1,0 +1,1 @@
+require(["re-config"],function(){require(["path","jquery"],function(e,i){i(".tast1").click(function(){alert(123)})})});

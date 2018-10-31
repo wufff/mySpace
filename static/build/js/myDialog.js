@@ -1,0 +1,1 @@
+require(["jquery","dialog"],function(c,i){c(".tast1").click(function(){i.toast({icon:"icon-ask-circle",content:"测试下一哦？",time:2e3})})});
