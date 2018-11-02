@@ -18,7 +18,7 @@ define(["jquery"], function($) {
             $("body").addClass('overhide');
             var settings = {};
             $.extend(settings,def,option);
-            var dialogContent = '<div class="customTipsSuccessfulOperation"><span class="' + settings.icon + '" style="background:'+ settings.color +'"></span>' + settings.content + '</div>';
+            var dialogContent = '<div class="toast-g"><span class="' + settings.icon + '" style="background:'+ settings.color +'"></span>' + settings.content + '</div>';
             $("body").eq(0).append(dialogContent);
             var windowWidth = document.documentElement.clientWidth;
             var windowHeight = document.documentElement.clientHeight;
@@ -30,11 +30,11 @@ define(["jquery"], function($) {
             }
             var documentHeight = document.documentElement.clientHeight + document.documentElement.scrollHeight;
             var documentWidth = document.documentElement.clientWidth + document.documentElement.scrollWidth;
-            var dialogHeight = $(".customTipsSuccessfulOperation")[0].clientHeight;
-            var dialogWidth = $(".customTipsSuccessfulOperation")[0].clientWidth;
+            var dialogHeight = $(".toast-g")[0].clientHeight;
+            var dialogWidth = $(".toast-g")[0].clientWidth;
             var editFraTop = windowHeight / 2 - dialogHeight / 2 + bodyScrollTop >= 0 ? windowHeight / 2 - dialogHeight / 2 + bodyScrollTop : 0;
             var editFraLfet = windowWidth / 2 - dialogWidth / 2 >= 0 ? windowHeight / 2 - dialogHeight / 2 + bodyScrollTop : 0;
-            $(".customTipsSuccessfulOperation").css({
+            $(".toast-g").css({
                 "top": editFraTop,
                 "left": windowWidth / 2 - dialogWidth / 2,
                 "position": "absolute",
@@ -42,7 +42,7 @@ define(["jquery"], function($) {
             });
             if (settings.time > 0) {
                 setTimeout(function() {
-                    $(".customTipsSuccessfulOperation").remove();
+                    $(".toast-g").remove();
                     $("body").removeClass('overhide');
                 }, settings.time);
             }

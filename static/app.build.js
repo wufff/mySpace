@@ -3,5 +3,16 @@
    baseUrl:"./js",
    dir:"./build",
    mainConfigFile:"./src/js/re-config.js",
-   name:"myPage"
+   optimizeCss:"standard",
+   modules:[{
+   	name:"myDialog"
+   },{
+   	name:"myPage"
+   },{
+   	name:"lookImgPage"
+   },{
+   	name:"myExp"
+   }]
 })
+
+

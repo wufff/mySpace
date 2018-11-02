@@ -4,8 +4,6 @@
  * @date    2018-10-26 10:47:50
  * @version $Id$
  */
- 
-
 require(["jquery","page","path"],function($,pages,patch){
     //分页
     	function logList(obj) {
@@ -39,8 +37,6 @@ require(["jquery","page","path"],function($,pages,patch){
         var requestData = "activity_id=2&page_num=10&p=1";
         var requestUrl = "http://wufff.rjs.dev.dodoedu.com/CallAjaxActivity/ajaxPhotoList";
         pages.postAjax(requestUrl, requestData, logList, null,null);	
-
-
 
 })
 

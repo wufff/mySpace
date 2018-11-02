@@ -1,1 +1,0 @@
-require(["re-config"],function(){require(["jquery","expression"],function(e,r){r.showFace(".showFace",".commentText");var c="<p>"+r.replaceSmile("你好[微笑]你好[耍酷]")+"<p>";e(".faceText").html(c)})});

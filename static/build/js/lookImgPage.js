@@ -1,1 +1,0 @@
-require(["re-config"],function(){require(["jquery","album"],function(i,r){r.initUi(".silderWrap",7)})});
