@@ -1,4 +1,3 @@
-require(["re-config"],function(){
 require(["jquery","expression"],function($,face){
 	  // 调用选项
       face.showFace(".showFace",".commentText");
@@ -26,4 +25,4 @@ require(["jquery","expression"],function($,face){
 
 
 })
-})
+

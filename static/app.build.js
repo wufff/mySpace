@@ -4,6 +4,7 @@
    dir:"./build",
    mainConfigFile:"./src/js/re-config.js",
    optimizeCss:"standard",
+   removeCombined:true,
    modules:[{
    	name:"myDialog"
    },{
