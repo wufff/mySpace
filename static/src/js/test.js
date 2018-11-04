@@ -6,8 +6,8 @@
  * @version $Id$
  */
  
-require(["re-config"],function(){
-require(["path","jquery"],function(path,$){
+
+require(["path","jquery","bootstrap"],function(path,$){
      $(".tast1").click(function(){
      	alert(123);
      })
@@ -25,4 +25,4 @@ require(["path","jquery"],function(path,$){
 
 
 })
-})
+
