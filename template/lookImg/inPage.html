@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<title>inPage</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/mySpace/static/src/style/reset.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+<style type="text/css">
+      .lookImg { width: 1200px; margin: 0 auto;}  
+
+      /* 上半部分*/
+      .lookImg .top { height: 400px;background: pink; padding-top: 80px;}
+       .lookImg .bigLoading {text-align: center;}
+      .lookImg .silder .imgWrap { float:left; }
+      .lookImg .bigImgWrap { width: 100%; height:300px;}
+      .lookImg .bigImgWrap  {  
+                position: relative;
+                background-image: url("/mySpace/static/src/img/lookImg/item_big1.jpg");
+                background-repeat: no-repeat;
+                background-position: center; 
+                background-size:contain; 
+                top:-50px;
+         }
+
+      /*下半部分*/
+      .lookImg .silderWrap { width: 1100px;float: left;overflow: hidden;}
+      .lookImg  .tab .leftBar, .lookImg  .tab .rightBar  { float: left; width: 50px; height: 100px;background: red; cursor: pointer;}
+       .lookImg  .tab .rightBar { float: right; }
+       .lookImg  .silder {float: left;/*white-space:nowrap;*/height: 151px;}
+       .lookImg  .imgWrap {float: left;}
+       .lookImg  .imgWrap img { width: 80%;opacity: 0.5;cursor:pointer;}
+       .lookImg  .imgWrap img:hover { opacity: 1 }
+       .lookImg  .imgWrap img.active {opacity: 1}
+       .lookImg i.locked { color: green; }
+</style>
+</head>
+<body>    
+	<div class="lookImg">
+                <div class="top">
+                     <div class="bigLoading">
+                         <img src="/mySpace/static/src/img/loading/rjsAjaxloading.gif">
+                         <div class="bigImgWrap">
+                         
+                         </div>    
+                     </div>
+                     
+                </div>
+                <div class="tab clearfix">
+                	<div class="leftBar" title="没有上一组" locked="1">
+                             <i class="fa fa-chevron-left locked"></i>
+                        </div>
+                	
+                	<div class="silderWrap">
+                                <div class="silder" style="display: none;">
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min1.jpg" 
+                                        class="active" link="/mySpace/static/src/img/lookImg/item_big1.jpg">
+                                    </div>
+                                     <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min2.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big2.jpg">
+                                    </div>
+                                   <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min3.jpg" 
+                                        link="/mySpace/static/src/img/lookImg/item_big3.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min4.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big4.jpg">
+                                    </div>
+                                   <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min5.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big5.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min6.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big6.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min7.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big7.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min8.jpg" 
+                                        link="/mySpace/static/src/img/lookImg/item_big8.jpg">
+                                    </div>
+                                   <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min9.jpg" 
+                                        link="/mySpace/static/src/img/lookImg/item_big9.jpg">
+                                    </div>
+                                     <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min12.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big12.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min13.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big13.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min14.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big14.jpg">
+                                    </div>
+                                    <div class="imgWrap">
+                                        <img src="/mySpace/static/src/img/lookImg/item_min15.jpg" 
+                                         link="/mySpace/static/src/img/lookImg/item_big15.jpg">
+                                    </div>
+                                </div>  
+                                <div class="loading">loading</div>
+                        </div>
+                        <div class="rightBar" title="下一组" locked="0">
+                               <i class="fa fa-chevron-right"></i>  
+                        </div>
+                </div>
+	</div>
+</body>
+<script  src="/mySpace/static/src/js/lib/require.js"></script>
+<script  src="/mySpace/static/src/js/re-config.js"></script>
+<script src="/mySpace/static/src/js/lookImgPage.js"></script>
+
+
+
+<!-- <script  src="/mySpace/static/build/js/lib/require.js"></script>
+<script  src="/mySpace/static/build/js/re-config.js"></script>
+<script  src="/mySpace/static/build/js/lookImgPage.js"></script> -->
+</html>

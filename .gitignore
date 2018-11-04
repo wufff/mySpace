@@ -1,0 +1,5 @@
+# Config/cache.inc.php
+# Config/db.inc.php
+# Config/url.inc.php
+# Config/webservices.inc.php
+static/build/*
