@@ -11,7 +11,7 @@ define(["jquery"], function($) {
         toast: function(option) {
             var def = {
                 icon: "icon-dranger-o",
-                color:"#ffb400",
+                color:"transparent",
                 content: "操作成功！",
                 time: 1000
             };

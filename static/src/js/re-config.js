@@ -10,6 +10,7 @@ require.config({
 			"dialog": "./ui/dialog",
 			"path":"./tools/path",
 			"page": "./tools/pags",
+			"inputE":"/ui/inputedit/index"
 	},
 	shim: {
          "bootstrap":["jquery"],
