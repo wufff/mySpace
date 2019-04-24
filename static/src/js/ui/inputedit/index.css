@@ -1,0 +1,40 @@
+.inputTexBor{
+	position: relative;
+	z-index: 1;
+}
+.inputTexBor .nunArea{
+	position: absolute;
+	z-index: 5;
+	color: #999;
+	right: 10px;
+	top: 16px;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	background-color: #fff;
+}
+.search-list .inputTexBor .inputVal{
+    height: 36px;
+    border: 1px solid #d2d2d2;
+    box-shadow: 0 1px 0 #ededed inset;
+    background-color: white;
+    padding: 0 10px;
+    line-height: 36px;
+    float: none;
+    vertical-align: initial;
+    text-align: left;
+}
+.search-list .inputTexBor .nunArea{
+	top:4px;
+	line-height:14px;
+}
+.inputTexBor  .currentNum{
+	padding-right: 3px;
+}
+.inputTexBor  .totalNum{
+	padding-left: 3px;
+}
+.inputTexBor .error{
+	border: 1px solid red;
+    box-shadow: 0px 0px 5px red;
+}

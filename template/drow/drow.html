@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<title>loading</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="/mySpace/static/src/style/reset.css">
+
+</head>
+<body>    
+<script type="text/javascript" src="/mySpace/static/src/js/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="/mySpace/static/src/js/ui/drawing/html2canvas.js"></script>
+<script type="text/javascript" src="/mySpace/static/src/js/ui/drawing/canvas2Image.js"></script>
+<script src="/mySpace/static/src/js/ui/drawing/jscolor.js"></script>
+<div style="text-align:right">
+	<input class="jscolor" value="ab2567">
+	<a class="btn btn-primary btn-xs" onclick="cancelCanvas()">撤销</a>
+	<a class="btn btn-primary btn-xs" onclick="clearCanvas()">清空画板</a>
+</div>
+
+  <!--   <div class='draw-title' onselectstart='return false' style='position: absolute;top: 0;left: 0;width: 100%;height:100%;'></div> -->
+  <div style="border:1px solid red;">
+  	   <canvas id='myCanvas2'  width="800" height="600"></canvas>
+  </div>
+
+
+<script>
+
+var mousePressed = false;
+var lastX, lastY;
+var ctx;
+var obj;
+$(function(){
+   // if($('#myCanvas2').length == 0)
+   // {
+       Drawing(); 
+       InitThis();
+       jscolor.installByClassName('jscolor')
+    // }
+})
+
+function Drawing()
+{
+    $('#myCanvas2').attr({'width':"800","height":"600"})
+	ctx = $('#myCanvas2').get(0).getContext("2d");
+    // html2canvas(title,{
+    //     onrendered:function(canvas) {
+    //         $('#drawing .modal-body').html(canvas);
+    //         $("#drawing canvas").attr('id','myCanvas2');
+    //         $('#drawing').modal();
+    //         ctx = document.getElementById('myCanvas2').getContext("2d");
+    //     },
+    //         width:width,
+    //         height:canvasheight
+
+    // });
+
+}
+
+var temporary = []
+var canvasimage = []
+
+function InitThis()
+{
+    $('#myCanvas2').mousedown(function(e) {
+        e.stopPropagation()
+        mousePressed = true;
+        var x = e.pageX - $(this).offset().left,y = e.pageY - $(this).offset().top 
+        Draw(x, y, false);
+        temporary = []
+        temporary.push({x:x,y:y})
+    });
+    $('#myCanvas2').mousemove(function(e) {
+        e.stopPropagation()
+        if (mousePressed) {
+            var x = e.pageX - $(this).offset().left,y = e.pageY - $(this).offset().top 
+            Draw(x, y, true);
+            temporary.push({x:x,y:y})
+        }
+    });
+    $('#myCanvas2').mouseup(function(e) {
+        e.stopPropagation()
+        mousePressed = false;
+        console.log(temporary);
+        canvasimage.push(temporary);
+        temporary = []
+    });
+    $('#myCanvas').mouseleave(function(e) {
+        mousePressed = false;
+    });
+    // $("#myCanvas2").bind('touchstart', function(ev) {
+    //     ev.preventDefault();
+    //     var e = ev.originalEvent.touches[0];
+    //     mousePressed = true;
+    //     var x = e.pageX - $(this).offset().left,y = e.pageY - $(this).offset().top 
+    //     Draw(x, y, false);
+    //     temporary.push({x:x,y:y});
+    // });
+    // $("#myCanvas2").bind('touchmove', function(ev) {
+    //     ev.preventDefault();
+    //     if (mousePressed) {
+    //         var e = ev.originalEvent.touches[0];
+    //         var x = e.pageX - $(this).offset().left,y = e.pageY - $(this).offset().top 
+    //         Draw(x, y, true);
+    //         temporary.push({x:x,y:y});
+    //     }
+    // });
+    // $("#myCanvas2").bind('touchend', function(ev) {
+    //     ev.preventDefault();
+    //     mousePressed = false;
+    //     canvasimage.push(temporary);
+    //     temporary = []
+    // });    
+}
+
+function Draw(x, y, isDown) {
+    if (isDown) {
+        ctx.beginPath();
+        ctx.strokeStyle = '#'+$('.jscolor').val()+'';
+        ctx.lineWidth = 4 ;
+        ctx.lineJoin = "round";
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.closePath();
+        ctx.stroke();
+    }
+    lastX = x;
+    lastY = y;
+}
+//画板撤销上一步功能
+function cancelCanvas(){
+    if(canvasimage.length > 0){
+        canvasimage.pop()
+        clearCanvas()
+        if (canvasimage.length > 0) {
+            canvasimage.forEach((item,index) => {
+                item.forEach((item1,index1) => {
+                    if(index1 == 0){
+                        Draw(item1.x,item1.y,false)
+                    }else{
+                        Draw(item1.x,item1.y,true)
+                    }
+                });
+            });
+        }
+    }
+}
+
+function draw2(x,y,isDown){
+    if (isDown) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 4 ;
+        ctx.lineJoin = "round";
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.closePath();
+        ctx.stroke();
+    }
+    lastX = x;
+    lastY = y;
+}
+
+function clearCanvas()
+{   
+	console.log("1231");
+    Drawing();
+}
+function fnCloseDialog(dlgid)
+{
+    $("#" + dlgid).remove();
+    $('.draw-title').css("font-size",'.03rem');
+}
+</script>
+</body>
+</html>

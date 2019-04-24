@@ -6,6 +6,6 @@ require.config({
 			"expression": "./ui/expression",
 			"album": "./ui/album",
 			"path":"./tools/path",
-			"page": "./tools/pages",
+			"page": "./tools/pages"
 	}
 });
