@@ -1,27 +1,52 @@
-define(['jquery','path'], function($,pub) {
+define(['path','layui'], function(path,layui) {
+	var layer = layui.layer;
+	var $ = jQuery = layui.jquery;
 	var _newobj = "",
 		_self   = {
 		//ajax调用公共方法
-		getAjax: function(requestUrl,requestData,SuccessCallback){	
-			if($("body").attr("requestData") == requestData){
+		loading:null,
+		getAjax: function(requestUrl, requestData, SuccessCallback) {
+			if ($("body").attr("requestData") == 0) {
 				SuccessCallback(_newobj, null);
-			}else{
-				$.get(requestUrl,requestData,function(data){
-					_newobj = data;					
-					$("body").attr({"httpType":"getAjax","requestData":requestData});
-					if(SuccessCallback != undefined){
-						SuccessCallback(data, null);
+				$("body").attr({
+					"requestData": 1
+				});
+			} else {
+				  _self.loading = layer.load(5);
+				$.get(requestUrl, requestData, function(data) {
+					if (data.type == "login") {
+						layer.msg("请先登录！", {
+							anim: -1
+						});
+						setTimeout(function() {
+							// window.location.href = "/";
+						}, 300)
+						return;
 					}
-				},"json");
+					_newobj = data;
+					$("body").attr({"httpType": "getAjax"});
+					if (data.type == "error") {
+					$("body").attr({"requestData": 0});
+				    }
+					SuccessCallback(data, null);
+				}, "json");
 			}
 		},
 		postAjax: function(requestUrl,requestData,SuccessCallback){
-			if($("body").attr("requestData") == requestData){				
+			if($("body").attr("requestData") == 0){			
 				SuccessCallback(_newobj, null);
 			}else{
+			 
 				$.post(requestUrl,requestData,function(data){
+					if(data.type == "login"){
+						 layer.msg("请先登录！",{anim:-1});
+						 setTimeout(function(){
+						 	// window.location.href ="/";
+						 },300)
+						 return;
+					}
 					_newobj = data;	
-					console.log(_newobj);				
+								
 					$("body").attr({"httpType":"postAjax","requestData":requestData});	
 					if(SuccessCallback != undefined){
 						SuccessCallback(data, null);
@@ -29,22 +54,55 @@ define(['jquery','path'], function($,pub) {
 				},"json");
 			}
 		},
+
 		//跳转至哪一页
 		gotopage: function(target, isBack) {
 			this.cpage = target; //把页面计数定位到第几页
 			this.page();
 			this.reloadpageAjax(target, isBack);
 		},
+
 		//添加页码点击事件
 		ready2go: function(isBack) {
 			var obj = this;
 			$("#"+obj.page_obj_id).off("click","a").on("click","a", function() {
-				$("#"+obj.page_obj_id).prev().html('<div style="padding:40px 0 0 0;text-align:center;"><img src="'+pub.localhostImg+'/loading/rjsAjaxloading.gif"></div>');
+				// if($(".tableLoading").length > 0){
+				// 	$(".tableLoading").html('<div>表格数据加载中...</div>');
+				// }
+			    if($("#tbody").length > 0){
+			    	$("#tbody").html("");
+			    }
+				if($(".layui-row")){
+					$(".layui-row").html('<div style="padding:40px 0 0 0;text-align:center;"><img src="'+path.img+'/rjsAjaxloading.gif"></div>');
+				}
+				// $("#"+obj.page_obj_id).prev().html('<div style="padding:40px 0 0 0;text-align:center;"><img src="'+path.img+'/rjsAjaxloading.gif"></div>');
 				obj.target_p = parseInt($(this).attr("pageIndex"));
 				_self.gotopage.call(obj, obj.target_p, isBack);
 			});
+
+           $("#"+obj.page_obj_id).off("click","#goBageBt").on("click","#goBageBt", function() {
+				// $("#"+obj.page_obj_id).prev().html('<div style="padding:40px 0 0 0;text-align:center;"><img src="'+path.img+'/rjsAjaxloading.gif"></div>');
+                var vaule =  $("#"+obj.page_obj_id).find("#goBageText").val();          
+				obj.target_p = parseInt(vaule);
+				// console.log(obj.target_p);
+				if(vaule < 1 || vaule > obj.totalpage){
+					 return;
+				}else{
+					if($(".tableLoading").length > 0){
+						$(".tableLoading").html('<div>表格数据加载中...</div>');
+						}
+					    if($("#tbody").length > 0){
+					    	$("#tbody").html("");
+					    }
+						if($(".layui-row")){
+							$(".layui-row").html('<div style="padding:40px 0 0 0;text-align:center;"><img src="'+path.img+'/rjsAjaxloading.gif"></div>');
+						}
+					_self.gotopage.call(obj, obj.target_p, isBack);  
+				}
+			});
 		},
 		//方法驱动
+		
 		pageMethod: function() {
 			var obj = this;
 			obj.resetTotal();
@@ -69,7 +127,6 @@ define(['jquery','path'], function($,pub) {
 			this.page_obj_id = page_obj_id;
 			this.page_obj = $("#"+page_obj_id); //存放页码的div
 			this.results = parseInt(listLength); // 总记录数等于所有记录
-
 			this.totalpage; // 总页数
 			this.pagesize = parseInt(pagesize); //每页记录数
 			this.cpage = currentpagenum; //当前页,默认显示第一页
@@ -109,10 +166,10 @@ define(['jquery','path'], function($,pub) {
 					var requestData = this.requestData ? this.requestData : new Object();
 				} else {					
 					var requestData = this.requestData;					
-					if(GetQueryString("p") == null){
-						requestData = requestData + "&p=" + p;
+					if(GetQueryString("page") == null){
+						requestData = requestData + "&page=" + p;
 					}else{
-						requestData = requestData.replace('p='+GetQueryString("p"),'p='+p);
+						requestData = requestData.replace('page='+GetQueryString("page"),'page='+p);
 					}														
 				}	
 				if($("body").attr("httpType") == "getAjax"){
@@ -189,10 +246,13 @@ define(['jquery','path'], function($,pub) {
 					this.Prestr = "<a href='javascript:void(0)' pageIndex='" + parseInt(this.cpage - 1) + "'>上一页</a>";
 					this.startstr = "<a href='javascript:void(0)' pageIndex='" + 1 + "'>首页</a>";
 					this.nextstr = "<a href='javascript:void(0)' pageIndex='" + parseInt(this.cpage + 1) + "'>下一页</a>";
-					this.endstr = "<a href='javascript:void(0)' pageIndex='" + this.totalpage + "'>尾页</a> <em class='pagenum'>总数："+listLength+"</em>";
+					this.gofast = "<span class='goPageCell'>跳转到第<input type='text' name='' id='goBageText'>页<button id='goBageBt'>确定</button></span>";
+				    this.gofast = "";
+					this.pageDom = this.gofast +"<em class='pagenum'>总共："+ this.totalpage +"页 "+listLength+"条</em>";
+					this.endstr = "<a href='javascript:void(0)' pageIndex='" + this.totalpage + "'>尾页</a>"+this.pageDom;
 					if (this.cpage != 1) {
 						if (this.cpage >= this.totalpage) {
-							document.getElementById(this.page_obj_id).innerHTML = "<div>" + this.startstr + this.Prestr + this.outstr + "<\/div>";
+							document.getElementById(this.page_obj_id).innerHTML = "<div>" + this.startstr + this.Prestr + this.outstr + this.pageDom +"<\/div>";
 						} else {
 							document.getElementById(this.page_obj_id).innerHTML = "<div>" + this.startstr + this.Prestr + this.outstr + this.nextstr + this.endstr + "<\/div>";
 						}
@@ -207,4 +267,83 @@ define(['jquery','path'], function($,pub) {
 		}
 	};
 	return _self;
+
+
+
+	function queryString (str1,paramName){
+            //获取url中"?"符后的字串
+            var theRequest = new Object();
+            var  strs = str1.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+            return theRequest[paramName];
+   }
 });
+
+
+//分页样式
+// .comm-page {
+//   text-align: center;
+//   clear: both;
+// }
+// .comm-page div {
+//   width: auto;
+//   overflow: hidden;
+//   text-align: right;
+// }
+// .comm-page b {
+//   position: relative;
+//   top: 2px;
+// }
+// .comm-page a {
+//   color: #666;
+//   display: inline-block;
+//   padding: 6px 12px;
+//   margin: 5px 3px;
+//   border: 1px solid #d4d4d4;
+//   background: #fff;
+//   vertical-align: middle;
+//   border-radius: 5px;
+// }
+// .comm-page a:hover {
+//   text-decoration: none;
+//   background: #e6f4ff;
+//   border: 1px solid #e6f4ff;
+// }
+// .comm-page .current,
+// .comm-page .pagenum {
+//   display: inline-block;
+//   padding: 6px 12px;
+//   border: 1px solid #e6f4ff;
+//   background: #e6f4ff;
+//   vertical-align: middle;
+//   border-radius: 5px;
+// }
+// .comm-page .pagenum {
+//   color: #666;
+//   background: #d4d4d4;
+//   border: 1px solid #ccc;
+//   font-style: normal;
+//   font-weight: normal;
+// }
+// .comm-page .goPageCell {
+//   margin:0  15px;
+// }
+// .comm-page .goPageCell {
+//   color: #666;
+// }
+// .comm-page .goPageCell #goBageText {
+//   width: 36px;
+//   text-align: center;
+//   margin: 0 10px;
+// }
+// .comm-page .goPageCell #goBageBt {
+//    margin-left: 10px;
+//    padding: 3px 6px;
+//    border:1px solid #d4d4d4;
+//    background-color: #fff;
+// }
+// .comm-page .goPageCell #goBageBt:hover {
+//    background-color:  #e6f4ff;
+// }

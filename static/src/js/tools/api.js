@@ -21,9 +21,6 @@ define(["layui","path"], function(layui,path) {
 
 
 		ajaxPost:function(requestUrl,requestData,SuccessCallback,successPar){
-			if(path.is_local) {
-				requestData.jump = 1;
-			}
 			$.ajax({
 				type: "POST",
 				url: requestUrl,
@@ -39,17 +36,11 @@ define(["layui","path"], function(layui,path) {
 						obj = data;
 					}
 					
-					if(data.type == "login"){
-						 layer.msg("请先登录！",{anim:-1});
-						 setTimeout(function(){
-						 	window.location.href ="/";
-						 },300)
-						 return;
-						}else if( successPar && successPar != 0){
-						SuccessCallback(obj, successPar);
-					}else {
-						SuccessCallback(obj);
-					}
+					if (obj.type == "success"){
+		                  SuccessCallback(obj,successPar);
+		             }else{
+		                   layer.msg(obj.message,{icon:5});
+		            }
 					
 				},
 				error: function(err) {
