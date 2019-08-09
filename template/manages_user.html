@@ -149,6 +149,9 @@
                               <i class="fa fa-search"></i>
                         </button>
                     </dd>
+                    <dd>
+                        <button class="layui-btn layui-btn-primary" id="dialog">弹窗</button>
+                    </dd>
                 </dl>
             </div>
             <div class="table_b">
@@ -297,7 +300,32 @@
         </div>
             </div>
     </div>
-	
+    <style type="text/css">
+        #control dt{
+            width: 72px;
+        }
+    </style>
+<div class="control layui-layer-wrap" id="control" style="display: none;">
+    <form class="filter-g layui-form" lay-filter="control">
+        <dl class="">
+            <dt>
+                <span class="red">*</span>
+                分类名称:
+            </dt>
+            <dd>
+                <input type="text" class="layui-input" name="classify_name" lay-verify="required">
+            </dd>
+        </dl>
+        <dl class="">
+            <dt class="raidoDt">分类状态:</dt>
+            <dd>
+                <input type="radio" name="classify_status" title="启用" checked="" value="1">
+                <input type="radio" name="classify_status" title="禁用" value="2">
+            </dd>
+        </dl>
+        <button lay-submit="" lay-filter="control" id="submitControlBt" style="display: none"></button>
+    </form>
+</div>
     
 <script src="../static/src/js/lib/require.js"></script>
 <script type="text/javascript" src="../static/src/js/tools/re-config.js"></script>

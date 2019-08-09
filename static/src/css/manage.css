@@ -156,3 +156,31 @@ html,body {height: 100%;}
              $(this).val("");         
       }
     }) */                   
+/*body .pages * {
+    border: 1px solid #E6E7E1;
+    height: 34px;
+    line-height: 34px;
+    padding: 8px 12px;
+    margin: 1px;
+    color: #0099CC;
+}
+
+
+body .pages b {
+    background-color: #1E9FFF;
+    border-color: #1E9FFF;
+    color: #FFFFFF;
+}*/
+
+.control {
+   padding-top: 30px;
+   padding-left: 30px;
+}
+.control .filter-g > dl > dt {
+   margin-right: 15px;
+   text-align: right;
+   width: 70px;
+}
+.control .raidoDt{
+    padding-top: 11px;
+}
