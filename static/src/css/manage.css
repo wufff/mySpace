@@ -1,0 +1,186 @@
+html,body {height: 100%;}
+
+#header_m {height:8%;width: 100%;background-color: #272320;padding-top: 0.9%;padding-left: 27px;position: relative;}
+#header_m  .logo { color:#fff; font-size: 20px;}
+#header_m  .author { position: absolute;right: 0;top:33%;color:#fff;right: 34px; }
+#main_login { padding-top: 40px;background-color:#e4c384;padding-bottom: 40px;}
+.mianWrap {position:relative;min-height: 92%;}
+.article_nav { width: 222px;padding-left: 29px; padding-top: 20px;padding-bottom: 20px;height: 100%;overflow-y: auto;position: absolute;top:0;}
+.article_nav .title {font-size: 17px;margin-bottom: 5px;}
+.article_nav .title.active { color:#E4C384; }
+.article_nav .title i {margin-right: 5px;}
+.article_nav ul {
+  padding-left: 20px;
+  padding-bottom: 11px;
+}
+.article_nav li a {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.article_nav li a:hover {
+  text-decoration: none;
+  text-decoration: none;
+}
+
+.article_nav .title {color: #999999; }
+.article_nav li.active a { color:  #E4C384;}
+.article_nav li a {  color: #999999; }
+.article_nav li a:hover {color: #E4C384;}
+.article_nav {background: #272320;}
+.article_nav .head { color:#fff;font-size: 18px;margin-bottom: 20px; }
+
+
+.white_black {background-color:#fff;width: 365px;z-index: 500;height:374px;overflow: hidden;box-shadow: 0 0 15px rgba(204,204,204,.5);
+  border-radius: 0;}
+.white_black .head {height: 35px;line-height: 35px;background-color: #fafafa;font-size: 16px;padding-left:20px;color: #999;position: relative;
+   border-bottom: 1px solid #E5E5E5;}
+.white_black .head .closeDialog {position: absolute;top: 2px;right:4px;font-size: 30px;font-weight: 700;line-height: 1;color: #ddd;text-shadow: 0 1px 0 #FFF;
+    cursor: pointer;background: 0 0;border: 0;outline: none;}
+.white_black .body {padding: 15px 30px;position: relative;}
+.white_black .body .eer {position: absolute;left:32px;top:198px;}
+.white_black .body .err { position: absolute;left:193px;top:179px; }
+.white_black .body .title {position: relative;margin-bottom:15px;overflow: hidden;}
+.white_black .body .title  .h4 {
+   float: left;
+   padding-bottom:8px;
+   cursor: pointer;
+  /* width: 50%;*/
+  width: 100%;
+   text-align: center;
+   color:#999;
+}
+.white_black .body .title  .h4.active {
+    border-bottom: 3px solid #46b8da;
+    color:#666;
+}
+
+.white_black .body .title .bt {position: absolute;right: 0;top:7px;font-size: 13px;}
+.white_black .body .title .bt a {display: inline;text-decoration:underline;}
+.white_black .body  ul li {margin-bottom: 15px; border: 1px solid #ccc;padding: 6px;position: relative;}
+.white_black .body  ul li i {color: #999;font-size: 16px;padding: 0 5px;vertical-align: middle;}
+.white_black .body  ul li input {width: 240px;padding: 4px 6px;height: 26px;overflow: hidden;border: none;
+  border-left: 1px solid #ccc;vertical-align: middle;color: #333;box-shadow: none;margin-left: 2px;
+  outline: none;
+}
+.white_black .body input[type=checkbox] { width: 15px; height: 15px; vertical-align: text-bottom;}
+.white_black .body  ul li.prompt {border: none;padding: 0;}
+.white_black .body .foragerbt{font-size: 13px;margin-bottom: 45px;height: 15px;}
+.white_black .body .submit {width: 100%;height: 40px;line-height: 40px;cursor: pointer;display: block;color: #fff;
+   background-color: #ecb64f;border: none;outline: none;font-size: 16px;border-radius: 4px;margin-bottom: 15px;}
+.white_black .body .other_login h4{margin-bottom: 10px;}
+.white_black .body .other_login {font-size: 32px;cursor: pointer;}
+.white_black .body .other_login .qq {color: #90ddff;}
+.white_black .body .other_login .wx {color:  #d6ff90;}
+.white_black .body  label {font-weight: normal; color:#666;}
+.white_black .body img.author { width: 100px; height: 100px; border-radius:50%; border: 3px solid #269abc; display: block; margin: 0 auto;  }
+.btnWrap { padding-top: 16px;text-align: center; }
+.white_black .body .name { text-align: center; color:#ff7400;padding-top:30px; font-size: 18px;}
+.white_black  .codebt  { font-size: 15px;position: absolute;right: 10px; top:4px;width:120px;text-align: center;height:30px;}          
+
+#content { background-color: #fff;padding-top: 20px;margin-left: 260px;padding-right: 35px;}
+#content .breadcrumb { margin-bottom: 22px; }
+
+
+.filter-g {  }
+.filter-g > dl { margin-bottom: 10px;min-height: 49px; }
+.filter-g > dl > dt { float: left;padding-top: 8px;font-weight: normal; margin-right: 10px;}
+.filter-g  > dl > dd { float: left;margin-right: 20px; }
+.filter-g  > dl > dd.year { width: 90px; }
+.filter-g  > dl > dd.type { width: 110px; }
+.filter-g  > dl > dd.city { width: 140px; }
+.filter-g  > dl > dd.county { width: 180px; }
+.filter-g  > dl > dd.text { padding-top: 7px; }
+.filter-g > dl > dt.label { width: 70px;text-align: right; }
+.filter-g > dl > dt.label span { margin-right: 5px; }
+.label2 .filter-g > dl > dt.label{  width: 110px; }
+
+/** ===============table_b =============**/  
+
+.table_b   .layui-table thead tr th { }
+.table_b   .layui-table thead tr th, .table_b   .layui-table  tbody tr td { text-align: center;}
+.table_b   .layui-table  tbody tr td[data-field="si_content"]{text-align: left;}
+.table_b   .layui-table tbody tr:hover { background-color: transparent; }
+.table_b tr a {color: #1E9FFF;cursor: pointer;margin: 0 5px;}
+.layui-table-click, .layui-table-hover { background-color: transparent !important; }
+
+
+
+
+#upload .upform .item { font-size: 15px;margin-bottom: 18px; }
+#upload .upform .item .dt { float: left; width:158px;text-align: left;margin-right: 10px;font-size: 15px;padding-top: 6px;padding-left: 30px; }
+#upload .upform .item .dd { float: left; }
+#upload .upform .item   .input{ width: 880px;margin-bottom: 17px; }
+#upload .upform .item   .input.title {}
+#upload .upform .item .tx{ color:#b2b2b2; }
+#upload .upform  .btnWrap { width:200px;padding-left: 170px; }
+#upload  .info { background: #fff;padding-left: 10px;margin-bottom: 10px;}
+#upload  #imglist img { width: 230px; height: auto; margin-bottom: 10px; }
+#upload  #imglist input { width: 420px; }
+#upload  #imglist .del_upImg {margin-left: 10px;}
+#upload  #imglist { margin-top: 10px; }
+#upload  .info .title { font-size: 18px;margin-bottom: 15px; }
+#upload  .info .content {font-size: 16px;padding-left: 30px;color:#4c4c4c;}
+#upload  .info .content li { margin-bottom: 10px; text-indent: -1em;}
+#upload  .info .content li.two { padding-left: 24px; }
+#upload .uplist { background-color: #f2f2f2;overflow: hidden; padding: 8px 14px;}
+#upload .uplist  .del, #upload .uplist  .delx, #upload .uplist  .deldoc { float: right;color:#1237a0; }
+#upload  .span_wp { min-height: 38px; width: 360px;border:1px solid #ddd; padding-left: 5px;line-height: 38px;padding-right: 5px;}
+#upload  .span_wp input { height: 36px; border:none;line-height: 38px; width: 55px;}
+#upload  .span_wp .tag { background: #419ae6;padding: 2px 5px;margin-right: 5px; color: #fff}
+#upload  .span_wp .tag  .del { font-size: #fff; cursor: pointer;color: #fff}
+#upload  .tagItem { margin-bottom: 10px; }
+#upload  .tag_k, #upload  .tag_v {display: inline-block; }
+#upload  .tag_k { width: 110px; }
+#upload  .tag_v { width: 400px; }
+
+/*<div class="input span_wp">                  
+                          <span class="tag">
+                               <span class="value">123123</span>
+                               <span class="del">×</span>
+                          </span>
+                          <span class="tag">
+                               <span class="value">123123</span>
+                               <span class="del">×</span>
+                          </span>
+                          <input type="text" name="" class="renderTagText">
+                     </div>*/
+/*   $(".renderTagText").blur(function(){
+      var v = $(this).val();
+      if(v) {
+         var html = '<span class="tag"><span class="value">'+ v +'</span><span class="del">×</span></span>'
+             $(this).before(html); 
+             $(this).val("");         
+      }
+    }) */                   
+/*body .pages * {
+    border: 1px solid #E6E7E1;
+    height: 34px;
+    line-height: 34px;
+    padding: 8px 12px;
+    margin: 1px;
+    color: #0099CC;
+}
+
+
+body .pages b {
+    background-color: #1E9FFF;
+    border-color: #1E9FFF;
+    color: #FFFFFF;
+}*/
+
+.control {
+   padding-top: 30px;
+   padding-left: 30px;
+}
+.control .filter-g > dl > dt {
+   margin-right: 15px;
+   text-align: right;
+   width: 70px;
+}
+.control .raidoDt{
+    padding-top: 11px;
+}

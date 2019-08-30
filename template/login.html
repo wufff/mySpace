@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+<title>index</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="../static/src/css/bace.css">
+<link rel="stylesheet" type="text/css" href="../static/src/css/public.css">
+<link rel="stylesheet" type="text/css" href="../static/src/css/manage.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>    
+	<div id="header_m">
+		<div class="container">
+			<a href="#" class="logo">
+				唯美民艺馆资源运营管理后台
+			</a>
+		</div>
+	</div>
+	<div id="main_login">
+		 <div class="container clearfix">
+		  <div class="pull-left"></div>
+		 <div class="pull-right">
+		 	 <div class="white_black" id="login_dialog">
+                <div class="body">
+                    <div class="title clearfix">
+                        <div class="h4" id="manageLogin" style="text-align: left;color: #3871e1;font-size: 20px;">管理员 登录</div>
+                        <!-- <div class="h4" id="teacherLogin">教师登录</div> -->
+                    </div>
+                    <form class="manageLogin">
+                        <ul class="list-unstyled">
+                            <li>
+                                <i class="fa fa-mobile" aria-hidden="true" style="transform: scale(1.5);position: relative;left: 1px;"></i>
+                                <input type="text"placeholder="手机号" id="mobile" autocomplete="on" style="position: relative;left: 3px;">
+                            </li>
+                            <!-- <li>
+                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                <input type="password"  placeholder="密码"  autocomplete="on" id="user_pwd">
+                                 <input type="password"  placeholder="密码"  autocomplete="new-password">
+                            </li> -->
+                            <li style="position: relative;">
+                             
+                               <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                               <input type="text" id="code" placeholder="密码">
+                             <!--   <button class="codebt" id="codebt">点击获取验证码</button>
+                               <button class="codebt" id="codebt_false" disabled style="display: none;">已发送 ( <span id="timebox">300</span> )</button>  -->
+                            </li>
+                        </ul>
+                       
+                        <div class="err">
+                            <span class="red" id="errInfo"></span>
+                        </div>
+                        <div class="eer" style="visibility: hidden;">
+                            <input type="checkbox" name="autologin" id="autologin" value="1" checked="1"> 
+                            <label for="thinkPass" >自动登录</label>
+                        </div>
+                        <div class="clear foragerbt">
+                            <a  class="pull-right"></a>
+                        </div>
+                        <input class="layui-btn layui-btin-primary" id="loginBt" value="登 录" type="button">
+                    </form>
+                    <div class="teacherLogin" style="display: none;">
+                        <a href="/Login/dodoLoginUrl" target="_blank" class="noLogin">
+                            <img src="http://wufff.static.dev.dodoedu.com/ncjxdPage/static/src/img/logo.png" class="go">
+                        </a>
+                        <p> <i class="fa fa-hand-pointer-o" aria-hidden="true"></i><i class="fa fa-hand-pointer-o" aria-hidden="true"></i><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+         </div>
+		 </div>
+	</div>
+	<div id="aaa" style="display: none;">12313</div>
+    
+<script src="/mySpace/static/src/js/lib/require.js"></script>
+<script type="text/javascript" src="/mySpace/static/src/js/tools/re-config.js"></script>
+<script type="text/javascript" src="/mySpace/static/src/js/index.js"></script>
+</body>  
+</html>

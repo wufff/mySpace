@@ -1,6 +1,7 @@
 define(["layui","path"], function(layui,path) {
 	var layer = layui.layer;
 	var $ = jquery = layui.jquery;
+	var loading;
 	return {
 		ajaxJSONP:function(url, data, callback) {
 			$.ajax({
@@ -21,6 +22,7 @@ define(["layui","path"], function(layui,path) {
 
 
 		ajaxPost:function(requestUrl,requestData,SuccessCallback,successPar){
+			  loading = layer.load(5);
 			$.ajax({
 				type: "POST",
 				url: requestUrl,
@@ -35,7 +37,7 @@ define(["layui","path"], function(layui,path) {
 					} catch (ex) {
 						obj = data;
 					}
-					
+					layer.close(loading);
 					if (obj.type == "success"){
 		                  SuccessCallback(obj,successPar);
 		             }else{
