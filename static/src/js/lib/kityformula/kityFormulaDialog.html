@@ -36,10 +36,15 @@
             margin: 0;
         }
         .bottom {
-           text-align: right;
            padding-right: 5px;
            padding-top: 5px;
+           position: relative;
+           width: 780px;
+           margin: 0 auto;
+           height: 30px;
         }
+
+
         .bottom  .addBtn {
             background-color: #f0f0f0;
             border-color: #f0f0f0;
@@ -54,8 +59,21 @@
             text-transform: capitalize;
             font-size: 18px;
             cursor: pointer;
-            display: inline-block;
+            position: absolute;
+            right: 5px;
+            top:12px;
         }
+        .changeRow {
+           position: absolute;
+           left: 8px;
+           top:11px;
+           width: 500px;
+           text-align: left;
+        }
+        .topTip {
+           color:#666666;
+           font-size: 14px;
+         }
     </style>
     <title></title>
 </head>
@@ -66,6 +84,11 @@
     </div>
 </div>
 <div class="bottom">
+    <span class="changeRow">
+        <input type="checkbox" id="changeRow">
+        <label for="changeRow">换行</label>
+        <span class="topTip">注：复杂的公式请选择换行</span>
+    </span>
     <div class="addBtn" onclick="getLatex()">确定</div>
 </div>
 <input type="hidden" id="data-latex" value="" />
@@ -75,15 +98,6 @@
 <script src="kityformula/js/kity-formula-parser.all.min.js"></script>
 <script src="kityformula/js/kityformula-editor.all.min.js"></script>
 <script>
-    // function setlatex(imgLatex){
-    //     try {
-    //         window.kfe.execCommand( "render", imgLatex || "\\placeholder" );
-    //         window.kfe.execCommand( "focus" );
-    //     }catch (e) {
-    //
-    //     }
-    // }
-
     $(function($){
         if ( document.body.addEventListener ) {
             $( "#tips").html('<div id="loading"><img src="kityformula/loading.gif" alt="loading" /><p>正在加载，请耐心等待...</p></div>' );
@@ -95,28 +109,17 @@
                     path: "./kityformula/resource/"
                 }
             } );
-
             factory.ready( function ( KFEditor ) {
                 $( "#tips").remove();
                 this.execCommand( "render", null || "\\placeholder" );
                 this.execCommand( "focus" );
                 window.kfe = this;
             } );
-            // onok = function(editor){
-            //     kfe.execCommand('get.image.data', function(data){
-            //         var latex = window.kfe.execCommand('get.source');
-            //         editor.insertHtml('<img class="kfformula" style="vertical-align: middle;" src="'+ data.img +'" data-latex="' + latex + '" />');
-            //         $( "#tips").remove();
-            //         return true;
-            //     });
-            //     return false;
-            // }
         } else {
             $( "#tips").css( "color", "black" );
             $( "#tips").css( "padding", "10px" );
         }
     });
-
 
     var targetOrigin = window.location.origin;
 
@@ -126,13 +129,17 @@
 
     function  getLatex() {
         var latex = window.kfe.execCommand('get.source');
+        var checked = document.getElementById("changeRow").checked;
+        var obj = {
+            latex:latex,
+            checked:checked
+        };
         // $(".value").html(latex);
-        sendMessage({content:latex});
+        sendMessage({content:JSON.stringify(obj)});
         //window.parent.editor.windowManager.close();
         setTimeout(function () {
             window.parent.editor.windowManager.close();
         },200)
-        //.......................................................................................alert(latex);
     }
 
     function setlatex(imgLatex) {
@@ -145,11 +152,11 @@
     }
 
     window.addEventListener('message', function (e) {
-        console.log('Received message from parent window', e.data);
-        setlatex(e.data.message)
+        //console.log('Received message from parent window', e.data);
+         var data  = JSON.parse(e.data.message);
+         document.getElementById("changeRow").checked = data.checked;
+         setlatex(data.latex);
     });
-
 </script>
-
 </body>
 </html>

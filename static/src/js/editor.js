@@ -6,7 +6,7 @@ require(["jquery","lay","tinymce",'paths'],function($,layer,tinymce,path){
         menubar: false,  //顶部菜单
         plugins: "image emoticons  code",
         statusbar: false,
-        toolbar: " undo redo | bold italic | alignleft aligncenter | image emoticons code "
+        toolbar: "undo redo | bold italic | alignleft aligncenter | image emoticons code"
     });
 });
 

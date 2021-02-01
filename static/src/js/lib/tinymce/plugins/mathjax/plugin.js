@@ -1,6 +1,4 @@
 tinymce.PluginManager.add('mathjax', function(editor, url) {
-
-  // plugin configuration options
   let mathjaxClassName = editor.settings.mathjax.className || "math-tex";
   let mathjaxTempClassName = mathjaxClassName + '-original';
   let mathjaxSymbols = editor.settings.mathjax.symbols || {start: '\\(', end: '\\)'};
@@ -118,117 +116,37 @@ tinymce.PluginManager.add('mathjax', function(editor, url) {
 
   // open window with editor
   let openMathjaxEditor = function(target) {
-
     // let mathjaxId = editor.dom.uniqueId();
-
+    let latex_attribute;
     let latex = '';
+    let bl = false;
     if (target) {
       latex_attribute = target.getAttribute('data-latex');
+      let regex = /\[|\]/g;
+      bl = regex.test(latex_attribute);
       if (latex_attribute.length >= (mathjaxSymbols.start + mathjaxSymbols.end).length) {
         latex = latex_attribute.substr(mathjaxSymbols.start.length, latex_attribute.length - (mathjaxSymbols.start + mathjaxSymbols.end).length);
       }
     }
-
-    console.log(latex);
 
     window.editor = editor;
     const instanceApi = editor.windowManager.openUrl({
       title: '公式编辑区',
       url:'/myEditor/static/src/js/lib/kityformula/kityFormulaDialog.html',
       width:790,
-      height:480
+      height:490
     });
+
+    let obj = {
+      latex:latex,
+      checked:bl
+    };
 
     setTimeout(function () {
       instanceApi.sendMessage({
-        message: latex
+        message: JSON.stringify(obj)
       });
     }, 300);
-    // show new window
-    // editor.windowManager.open({
-    //   title: 'Mathjax',
-    //   width: 600,
-    //   height: 300,
-    //   body: {
-    //     type: 'panel',
-    //     items: [{
-    //       type: 'textarea',
-    //       name: 'title',
-    //       label: 'LaTex'
-    //     }, {
-    //       type: 'htmlpanel',
-    //       html: '<div style="text-align:right"><a href="https://wikibooks.org/wiki/LaTeX/Mathematics" target="_blank" style="font-size:small">LaTex</a></div>'
-    //     }, {
-    //       type: 'htmlpanel',
-    //       html: '<iframe id="' + mathjaxId + '" style="width: 100%; min-height: 50px;"></iframe>'
-    //     }]
-    //   },
-    //   buttons: [{type: 'submit', text: 'OK'}],
-    //   onSubmit: function onsubmit(api) {
-    //     let value = api.getData().title.trim();
-    //     if (target) {
-    //       target.innerHTML = '';
-    //       target.setAttribute('data-latex', getMathText(value));
-    //       checkElement(target);
-    //     } else {
-    //       let newElement = editor.getDoc().createElement('span');
-    //       newElement.innerHTML = getMathText(value);
-    //       newElement.classList.add(mathjaxClassName);
-    //       checkElement(newElement);
-    //       editor.insertContent(newElement.outerHTML);
-    //     }
-    //     editor.getDoc().defaultView.MathJax.startup.getComponents();
-    //     editor.getDoc().defaultView.MathJax.typeset();
-    //     api.close();
-    //   },
-    //   onChange: function(api) {
-    //     var value = api.getData().title.trim();
-    //     if (value != latex) {
-    //       //refreshDialogMathjax(value, document.getElementById(mathjaxId));
-    //       latex = value;
-    //     }
-    //   },
-    //   initialData: {title: latex}
-    // });
-
-    // add scripts to iframe
-    // let iframe = document.getElementById(mathjaxId);
-    // let iframeWindow = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
-    // let iframeDocument = iframeWindow.document;
-    // let iframeHead = iframeDocument.getElementsByTagName('head')[0];
-    // let iframeBody = iframeDocument.getElementsByTagName('body')[0];
-
-    // get latex for mathjax from simple text
-
-
-    // refresh latex in mathjax iframe
-    // let refreshDialogMathjax = function(latex) {
-    //   let MathJax = iframeWindow.MathJax;
-    //   let div = iframeBody.querySelector('div');
-    //   if (!div) {
-    //     div = iframeDocument.createElement('div');
-    //     div.classList.add(mathjaxTempClassName);
-    //     iframeBody.appendChild(div);
-    //   }
-    //   div.innerHTML = getMathText(latex, {start: '$$', end: '$$'});
-    //   if (MathJax && MathJax.startup) {
-    //     MathJax.startup.getComponents();
-    //     MathJax.typeset();
-    //   }
-    //
-    // };
-    // refreshDialogMathjax(latex);
-
-    // add scripts for dialog iframe
-    // for (let i = 0; i < mathjaxScripts.length; i++) {
-    //   let node = iframeWindow.document.createElement('script');
-    //   node.src = mathjaxScripts[i];
-    //   node.type = 'text/javascript';
-    //   node.async = false;
-    //   node.charset = 'utf-8';
-    //   iframeHead.appendChild(node);
-    // }
-
   };
 
  function getMathText(value, symbols) {
@@ -236,19 +154,26 @@ tinymce.PluginManager.add('mathjax', function(editor, url) {
       symbols = mathjaxSymbols;
     }
     return symbols.start + ' ' + value + ' ' + symbols.end;
-  };
-
+  }
 
   window.addEventListener('message', function (e) {
     //console.log('主页面', e.data.content);
-    var value;
-    if(e.data.content == "\placeholder") {
-      value = "";
-    }else {
-      value = e.data.content;
+    var json = JSON.parse(e.data.content);
+    var data = json.latex.trim();
+    var value = data.slice(1);
+
+    if(json.checked) {
+      mathjaxSymbols = { start: '\\[', end: '\\] ' };
+    }else{
+      mathjaxSymbols = { start: '\\(', end: '\\) ' };
     }
+
+    if(value === 'placeholder') {
+      data = "";
+    }
+
     let newElement = editor.getDoc().createElement('span');
-    newElement.innerHTML = getMathText(value);
+    newElement.innerHTML = getMathText(data);
     newElement.classList.add(mathjaxClassName);
     checkElement(newElement);
     editor.insertContent(newElement.outerHTML);
