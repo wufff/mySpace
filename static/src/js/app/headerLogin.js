@@ -1,26 +1,20 @@
 
 /**
- * 
+ *
  * @authors Your Name (you@example.org)
  * @date    2019-02-22 15:01:00
  * @version $Id$
  */
- 
+
 define(["layui","api","path","tools"],function(layui,api,path,tool){
-     var $ = jQuery = layui.jquery; 
+     var $ = jQuery = layui.jquery;
      var layer = layui.layer;
      var form = layui.form;
      var dialog;
-     
-     
 
      form.on('select(filter)', function(data){
         tool.filter(data.elem,data.value);
-    });   
-
-
-
-
+    });
 
 //登录按钮
   $("#loginBt").click(function(){
@@ -35,7 +29,7 @@ define(["layui","api","path","tools"],function(layui,api,path,tool){
         return false;
      }
      var url = path.api+"/adminApi/checkCaptcha";
-     var ajaxData = { 
+     var ajaxData = {
          mobile:mobile,
          valid_code:code,
          opt:105
@@ -55,7 +49,7 @@ define(["layui","api","path","tools"],function(layui,api,path,tool){
 //    if($(this).hasClass('noLogin')){
 //       return true;
 //    }else{
-//       var length = $("#header_loginBt").length; 
+//       var length = $("#header_loginBt").length;
 //       //console.log(length);
 //        if (length > 0) {
 //           login();
@@ -72,7 +66,7 @@ define(["layui","api","path","tools"],function(layui,api,path,tool){
 
 
 
- 
+
 
 
 

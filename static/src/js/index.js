@@ -1,7 +1,5 @@
-require(["jquery","layui"],function($,layui){
-	var layer = layui.layer;
-	var table = layui.table;
-    console.log(table)
+require(["jquery","lay"],function($,layer){
+
     $("#edite").click(function(){
     	layer.open({
          type: 1,
@@ -10,4 +8,7 @@ require(["jquery","layui"],function($,layui){
          area:["300px","300px"]
        })
     })
-})
+    $("#msg").click(function () {
+         layer.msg("看看书",{icon:1})
+    })
+});

@@ -1,18 +1,17 @@
 require.config({
-	baseUrl: "/mySpace/static/src/js",
+	baseUrl: "/myEditor/static/src/js",
 	paths: {
+		    "paths":"./path",
 			"jquery": "./lib/jquery/jquery1.21",
 			"lay":"./lib/layer/layer",
-			"expression": "./ui/expression",
-			"album": "./ui/album",
-			"path":"./tools/path",
-			"page": "./tools/pages",
-			"layui":"./lib/layui/layui.all"
-
+			"tinymce":"./lib/tinymce/tinymce.min"
 	},
 	shim: {
           "layui":{
           	exports:"layui"
-          }
+          },
+		  "tinymce":{
+			exports:"tinymce"
+		  }
 	}
 });

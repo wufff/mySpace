@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="kityformula/assets/styles/base.css">
+    <link rel="stylesheet" href="kityformula/assets/styles/ui.css">
+    <link rel="stylesheet" href="kityformula/assets/styles/scrollbar.css">
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        .kf-editor {
+            width: 780px;
+            height: 380px;
+        }
+        #loading {
+            height: 32px;
+            width: 340px;
+            line-height: 32px;
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            margin-left: -170px;
+            font-family: arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+        }
+        #loading img {
+            position: absolute;
+        }
+        #loading p {
+            display: block;
+            position: absolute;
+            left: 40px;
+            top: 0px;
+            margin: 0;
+        }
+        .bottom {
+           text-align: right;
+           padding-right: 5px;
+           padding-top: 5px;
+        }
+        .bottom  .addBtn {
+            background-color: #f0f0f0;
+            border-color: #f0f0f0;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: none;
+            color: #222f3e;
+            outline: 0;
+            padding: 4px 16px;
+            text-decoration: none;
+            text-transform: capitalize;
+            font-size: 18px;
+            cursor: pointer;
+            display: inline-block;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+<div id="kfEditorContainer" class="kf-editor" style="margin: 8px auto 0 auto;">
+    <div id="tips" class="tips">
+        sorry! Beta版本仅支持IE9及以上版本的浏览器，正式版本将会支持低版本浏览器，谢谢您的关注！
+    </div>
+</div>
+<div class="bottom">
+    <div class="addBtn" onclick="getLatex()">确定</div>
+</div>
+<input type="hidden" id="data-latex" value="" />
+<script src="kityformula/js/jquery-1.11.0.min.js"></script>
+<script src="kityformula/js/kitygraph.all.js"></script>
+<script src="kityformula/js/kity-formula-render.all.js"></script>
+<script src="kityformula/js/kity-formula-parser.all.min.js"></script>
+<script src="kityformula/js/kityformula-editor.all.min.js"></script>
+<script>
+    // function setlatex(imgLatex){
+    //     try {
+    //         window.kfe.execCommand( "render", imgLatex || "\\placeholder" );
+    //         window.kfe.execCommand( "focus" );
+    //     }catch (e) {
+    //
+    //     }
+    // }
+
+    $(function($){
+        if ( document.body.addEventListener ) {
+            $( "#tips").html('<div id="loading"><img src="kityformula/loading.gif" alt="loading" /><p>正在加载，请耐心等待...</p></div>' );
+            var factory = kf.EditorFactory.create( $( "#kfEditorContainer" )[ 0 ], {
+                render: {
+                    fontsize: 24
+                },
+                resource: {
+                    path: "./kityformula/resource/"
+                }
+            } );
+
+            factory.ready( function ( KFEditor ) {
+                $( "#tips").remove();
+                this.execCommand( "render", null || "\\placeholder" );
+                this.execCommand( "focus" );
+                window.kfe = this;
+            } );
+            // onok = function(editor){
+            //     kfe.execCommand('get.image.data', function(data){
+            //         var latex = window.kfe.execCommand('get.source');
+            //         editor.insertHtml('<img class="kfformula" style="vertical-align: middle;" src="'+ data.img +'" data-latex="' + latex + '" />');
+            //         $( "#tips").remove();
+            //         return true;
+            //     });
+            //     return false;
+            // }
+        } else {
+            $( "#tips").css( "color", "black" );
+            $( "#tips").css( "padding", "10px" );
+        }
+    });
+
+
+    var targetOrigin = window.location.origin;
+
+    const sendMessage = function (data) {
+        window.parent.postMessage(data,targetOrigin);
+    };
+
+    function  getLatex() {
+        var latex = window.kfe.execCommand('get.source');
+        // $(".value").html(latex);
+        sendMessage({content:latex});
+        //window.parent.editor.windowManager.close();
+        setTimeout(function () {
+            window.parent.editor.windowManager.close();
+        },200)
+        //.......................................................................................alert(latex);
+    }
+
+    function setlatex(imgLatex) {
+        try {
+            window.kfe.execCommand( "render", imgLatex || "\\placeholder" );
+            window.kfe.execCommand( "focus" );
+        }catch (e) {
+
+        }
+    }
+
+    window.addEventListener('message', function (e) {
+        console.log('Received message from parent window', e.data);
+        setlatex(e.data.message)
+    });
+
+</script>
+
+</body>
+</html>
