@@ -123,7 +123,7 @@ tinymce.PluginManager.add('mathjax', function(editor, url) {
     if (target) {
       latex_attribute = target.getAttribute('data-latex');
       let regex = /\[|\]/g;
-      bl = regex.test(latex_attribute);
+      bl = regex.test(mathjaxSymbols.start);
       if (latex_attribute.length >= (mathjaxSymbols.start + mathjaxSymbols.end).length) {
         latex = latex_attribute.substr(mathjaxSymbols.start.length, latex_attribute.length - (mathjaxSymbols.start + mathjaxSymbols.end).length);
       }
